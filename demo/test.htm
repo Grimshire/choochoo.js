@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test -- ChooChoo</title>
+    <script src="jquery-3.6.0.js"></script>
+    <script src="../choochoo.js"></script>
+    <script>        
+        $(document).ready(function() {
+            //only ever call this once
+            choochoo.allAboard();
+            $("#counter").text("All aboard!");
+            window.onscroll = function() {                 
+                scrollBanner();    
+                $("#counter").text("tickets to process: " + choochoo._schedule.length);                 
+            };
+            function scrollBanner() {
+                if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                    choochoo.chug(function() {                        
+                        $("#toptest").fadeOut(1000);                        
+                     }, "fadeOut");                             
+                } else {            
+                   choochoo.chug(function() {                        
+                        $("#toptest").fadeIn(1000); 
+                   }, "fadeIn");                    
+                }                  
+            }
+        });
+    </script>
+</head>
+<body>
+    <div style="width: 100%; height: 64in;">
+        <h1 id='toptest'style="width: inherit; border:lawngreen 3px solid; background-color: #BAFFBA; position: fixed; top: 10px;">
+            IMPORTANT BANNER TEXT
+        </h1>
+        <h3 id='counter' style="position: fixed; bottom: 10px;"></h3>
+    </div>
+</body>
+</html>
