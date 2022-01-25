@@ -31,9 +31,9 @@ choochoo.js solves latency issues related to events, and/or provides a timing lo
 
 ## Installation
 
-> choochoo.js requires jquery, though since it's so small it could easily be rewritten to be vanilla javascript.
-> Note that you should call choochoo.allAboard() in the same event that you wish to receive and monitor input from.
->after that, choochoo.chug() takes a function as its parameter, the second parameter isn't required at the moment as it may only be useful for debugging.
+choochoo.js requires jquery, though since it's so small it could easily be rewritten to be vanilla javascript.
+Note that you should call choochoo.allAboard() in the same event that you wish to receive and monitor input from.
+After that, choochoo.chug() takes a function as its parameter, the second parameter isn't required at the moment as it may only be useful for debugging.
 
 choochoo.js works by creating a time interval, executes functions within that time interval, and ignores all that failed to arrive in time (hence the train/ticket/passenger metaphor). For example, say within the the last second two events were fired 17 times each (a player advances his character sprite for example by holding down the forward and left keys). However, we only want to initiate what happened within say a 100th, a 10th, or half of a second and discard the rest, that way instead of 17 events, we can whittle them down to a few. 
 
