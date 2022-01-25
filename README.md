@@ -8,7 +8,7 @@ choochoo.js solves latency issues related to events, and/or provides a timing lo
 
 
 
-    >>$(document).ready(function() {
+    $(document).ready(function() {
             //only ever call this once
             choochoo.allAboard();
             $("#counter").text("All aboard!");
