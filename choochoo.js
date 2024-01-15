@@ -16,7 +16,7 @@ var choochoo = new function() {
             throw new Error("function is undefined or was not provided for the first parameter.");
         }
         if(!fname) {
-            throw new Error("function is undefined or was not provided for the second parameter.");
+            throw new Error("function name is undefined or was not provided for the second parameter.");
         }        
         let newTicket = Object.create(ticket);
         ticket.f = f;
