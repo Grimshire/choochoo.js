@@ -1,16 +1,20 @@
-var choochoo = new function() {
+const choochoo = new function() {
     let self = this;
     self._stop = false;    
     self._schedule = [];
     self._poll = 500;
-    let ticket = {        
+    
+    // This acts as a template for new tickets
+    let ticket = {         
         fname: null,
         f: null,
         time: null
     };        
+    
     self.setPoll = function(timeInterval){
         self._poll = timeInterval;
     };
+    
     self.chug = function(f, fname) {
         if(!f) {
             throw new Error("function is undefined or was not provided for the first parameter.");
@@ -18,37 +22,51 @@ var choochoo = new function() {
         if(!fname) {
             throw new Error("function name is undefined or was not provided for the second parameter.");
         }        
+        
         let newTicket = Object.create(ticket);
-        ticket.f = f;
-        ticket.fname = fname;
-        ticket.time = new Date();
-        self._schedule.push(ticket);                            
+        
+        newTicket.f = f;
+        newTicket.fname = fname;
+        newTicket.time = new Date();
+        
+        // Push the newly created ticket, not the template
+        self._schedule.push(newTicket);                            
     };
        
     let outBound = false;
+    
     self.allAboard = function(){   
         setInterval(function() {            
-            $.ajaxSetup({ async: false }); //forces synchronicity                                                          
+            $.ajaxSetup({ async: false }); //forces synchronicity                                        
+            
             if(outBound) return;
             outBound = true;
+            
             let boardingTime = new Date();
+            
             //generally, this is actually the fastest method of iteration in js            
             for(let i=0; i < self._schedule.length; i++) {
-                let currTicket = self._schedule[0];  
+                
+                let currTicket = self._schedule[i];  
+                
                 //was the passenger on time?  
                 if(currTicket.time > boardingTime - self._poll){
                     //then let's go!
-                    self._schedule[0].f();
-                }                                                      
+                    currTicket.f();
+                }                                                
             }                
+            
             //reset the train schedule
-            self._schedule = [];              
+            self._schedule = [];             
             outBound = false;                        
             $.ajaxSetup({ async: true }); //always turn back on                    
+            
         }, self._poll);
     }    
-    function init(){                          
+    
+    function init(){                           
         self._schedule = [];
     }
+    
     init();
 }
